@@ -148,7 +148,7 @@ footer{border-top:1px solid var(--line);margin-top:35px;padding-top:15px;color:#
 </nav>
 <script>
 const subjects=[
- {id:"Math",name:"Mathematics",icon:"∑",desc:"Numbers · Algebra · Geometry"},
+ {id:"Mathematics",name:"Mathematics",icon:"∑",desc:"Numbers · Algebra · Geometry"},
  {id:"Physics",name:"Physics",icon:"⚛",desc:"Concepts · Laws · Applications"},
  {id:"Chemistry",name:"Chemistry",icon:"⚗",desc:"Atoms · Bonding · Reactions"},
  {id:"Biology",name:"Biology",icon:"⌬",desc:"Cells · Life processes · Systems"},
@@ -187,11 +187,13 @@ const questions=[
 const titles={home:"Let's make progress.",questions:"Important questions",papers:"Previous examination papers",models:"Model papers & frameworks",students:"Real student answer papers",research:"Research desk"};
 function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id==="page-"+id));document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===id));document.getElementById("pageTitle").textContent=titles[id]||"9th Study Project";window.scrollTo({top:0,behavior:"smooth"});}
 document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
-const subjectHTML=subjects.map(s=>'<button class="card subject" onclick="filterSubject(\''+s.id+'\')"><span class="sub-icon">'+s.icon+'</span><span><b>'+s.name+'</b><small>'+s.desc+'</small></span></button>').join("");
+const subjectHTML=subjects.map(s=>'<button class="card subject" data-subject="'+s.id+'"><span class="sub-icon">'+s.icon+'</span><span><b>'+s.name+'</b><small>'+s.desc+'</small></span></button>').join("");
 document.getElementById("homeSubjects").innerHTML=subjectHTML;
+document.getElementById("homeSubjects").addEventListener("click",e=>{const b=e.target.closest("[data-subject]");if(b)filterSubject(b.dataset.subject);});
 document.getElementById("subjectFilter").innerHTML+='<option>Mathematics</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>Computer Science</option><option>English</option><option>Urdu</option><option>Islamiat</option><option>Tarjuma Quran</option>';
 function filterSubject(s){showPage("questions");document.getElementById("subjectFilter").value=s;renderQuestions();}
-function renderQuestions(){const term=document.getElementById("qSearch").value.toLowerCase();const sub=document.getElementById("subjectFilter").value;const typ=document.getElementById("typeFilter").value;const filtered=questions.filter(x=>(sub==="all"||x.s===sub)&&(typ==="all"||x.type===typ)&&[x.q,x.topic,x.s,x.a].join(" ").toLowerCase().includes(term));document.getElementById("questionList").innerHTML=filtered.map((x,i)=>'<article class="q-card" onclick="this.classList.toggle(\'open\')"><div class="q-top"><div><h3>'+x.q+'</h3><span class="tag">'+x.s+'</span><span class="tag">'+x.topic+'</span><span class="tag green">'+x.type+'</span></div><span class="muted">＋</span></div><div class="answer"><b>Answer guidance</b><p>'+x.a+'</p><div>'+x.tags.map(t=>'<span class="tag">'+t+'</span>').join("")+'</div></div></article>').join("")||'<div class="card muted">No matching questions. Try a different search or subject.</div>';}
+function renderQuestions(){const term=document.getElementById("qSearch").value.toLowerCase();const sub=document.getElementById("subjectFilter").value;const typ=document.getElementById("typeFilter").value;const filtered=questions.filter(x=>(sub==="all"||x.s===sub)&&(typ==="all"||x.type===typ)&&[x.q,x.topic,x.s,x.a].join(" ").toLowerCase().includes(term));document.getElementById("questionList").innerHTML=filtered.map((x,i)=>'<article class="q-card" data-click="this.classList.toggle(\'open\')"><div class="q-top"><div><h3>'+x.q+'</h3><span class="tag">'+x.s+'</span><span class="tag">'+x.topic+'</span><span class="tag green">'+x.type+'</span></div><span class="muted">＋</span></div><div class="answer"><b>Answer guidance</b><p>'+x.a+'</p><div>'+x.tags.map(t=>'<span class="tag">'+t+'</span>').join("")+'</div></div></article>').join("")||'<div class="card muted">No matching questions. Try a different search or subject.</div>';}
+document.getElementById("questionList").addEventListener("click",e=>{const card=e.target.closest(".q-card");if(card)card.classList.toggle("open");});
 ["qSearch","subjectFilter","typeFilter"].forEach(id=>document.getElementById(id).addEventListener("input",renderQuestions));renderQuestions();
 const modelDocs={
  framework:{title:"FBISE · Current Assessment Frameworks & Model Papers",url:"https://www.fbise.edu.pk/curriculum_model_paper.php",note:"Current official library. Select the Grade IX 50% MCQ / 50% descriptive framework for the relevant core subject."},

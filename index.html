@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101a2c">
+<title>9th Study Project — FBISE Grade 9</title>
+<style>
+:root{--bg:#0c1423;--panel:#121f33;--panel2:#182840;--line:#263a55;--text:#edf4ff;--muted:#9db0c9;--mint:#65dfb1;--blue:#7bb5ff;--gold:#f5c76a;--red:#ff8f8f;--shadow:0 18px 45px #0003}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#1c3957 0,transparent 40%),var(--bg);color:var(--text);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}.shell{max-width:1400px;margin:auto;min-height:100vh;display:grid;grid-template-columns:245px minmax(0,1fr)}
+aside{border-right:1px solid var(--line);padding:25px 16px;position:sticky;top:0;height:100vh;background:#0d1828d9;backdrop-filter:blur(12px)}
+.brand{display:flex;gap:12px;align-items:center;padding:3px 8px 25px}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#65dfb1,#7bb5ff);display:grid;place-items:center;color:#102037;font-size:21px;font-weight:900}.brand b{display:block;font-size:16px}.brand small{color:var(--muted);font-size:11px;letter-spacing:.08em}
+.nav-label{color:#7489a5;text-transform:uppercase;font-size:10px;font-weight:800;letter-spacing:.15em;padding:12px 12px 7px}
+.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;color:#a9bad0;text-align:left;padding:11px 12px;border-radius:11px;display:flex;gap:12px;align-items:center;transition:.18s}.nav button:hover{background:#192b43;color:white}.nav button.active{background:#1d3c50;color:var(--mint);box-shadow:inset 3px 0 var(--mint)}.nav .ico{width:21px;text-align:center;font-size:17px}
+.side-note{position:absolute;bottom:20px;left:17px;right:17px;padding:13px;border:1px solid var(--line);border-radius:13px;color:var(--muted);font-size:11px;background:#111f31}
+main{min-width:0;padding:27px clamp(16px,3vw,42px) 70px}.top{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:26px}.eyebrow{font-size:11px;color:var(--mint);font-weight:800;letter-spacing:.16em;text-transform:uppercase}.top h1{font-size:clamp(22px,3vw,31px);line-height:1.2;margin:5px 0 0;letter-spacing:-.04em}.datepill{border:1px solid var(--line);background:#142238;color:var(--muted);padding:8px 12px;border-radius:999px;font-size:12px;white-space:nowrap}
+.page{display:none}.page.active{display:block}.hero{border:1px solid #31506c;background:linear-gradient(115deg,#17364b,#15233b 62%,#1b2c46);border-radius:22px;padding:clamp(22px,4vw,38px);position:relative;overflow:hidden;box-shadow:var(--shadow)}.hero:after{content:"";position:absolute;width:250px;height:250px;border-radius:50%;border:1px solid #75d9b322;right:-60px;top:-80px;box-shadow:0 0 0 28px #75d9b20b,0 0 0 58px #75d9b208}.hero h2{font-size:clamp(25px,4vw,39px);line-height:1.15;max-width:650px;margin:10px 0}.hero p{color:#b8cbe0;max-width:650px;margin:0 0 20px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1}
+.btn{border:1px solid var(--line);background:#1b2c44;color:var(--text);padding:10px 15px;border-radius:11px;font-weight:700;font-size:13px}.btn:hover{border-color:var(--mint);transform:translateY(-1px)}.btn.primary{background:var(--mint);color:#09251e;border-color:var(--mint)}.btn.soft{background:#ffffff0c}
+.grid{display:grid;gap:14px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin:17px 0 27px}.stat,.card{background:linear-gradient(160deg,#16263b,#111e30);border:1px solid var(--line);border-radius:16px;padding:17px}.stat .num{font-size:27px;font-weight:800;letter-spacing:-.04em}.stat small,.muted{color:var(--muted)}.stat small{font-size:11px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:27px 0 13px}.section-head h2{font-size:19px;margin:0}.section-head p{color:var(--muted);font-size:12px;margin:3px 0 0}
+.subject-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.subject{display:flex;align-items:center;gap:12px;text-align:left;min-height:83px}.subject:hover{border-color:#5b9b9a;transform:translateY(-2px)}.sub-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#223d53;font-size:20px;flex:none}.subject b{display:block}.subject small{color:var(--muted);font-size:11px}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:15px 0}.field{background:#111f32;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:180px;outline:none}.field:focus{border-color:var(--mint)}.field.search{flex:1;min-width:230px}
+.question-list{display:grid;gap:11px}.q-card{border:1px solid var(--line);background:#132239;border-radius:14px;padding:16px}.q-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.q-card h3{font-size:15px;margin:0 0 5px}.q-card p{color:#bdcce0;margin:5px 0;font-size:13px}.tag{display:inline-block;border:1px solid #35516b;color:#a9c5dd;padding:3px 8px;border-radius:999px;font-size:10px;margin:2px 4px 2px 0}.tag.green{border-color:#326e5e;color:var(--mint)}.answer{display:none;border-top:1px solid var(--line);margin-top:12px;padding-top:10px;color:#d6e7f7;font-size:13px}.q-card.open .answer{display:block}.answer b{color:var(--mint)}
+.paper-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.paper-card{display:flex;gap:14px;align-items:flex-start}.paper-icon{width:44px;height:52px;border-radius:10px;background:#243b54;display:grid;place-items:center;font-size:22px;flex:none}.paper-card h3{font-size:15px;margin:0}.paper-card p{font-size:12px;color:var(--muted);margin:4px 0 11px}
+.notice{padding:14px 16px;border:1px solid #665535;background:#352c1c66;border-radius:13px;color:#e9d6ad;font-size:12px;margin:14px 0}.info{border-color:#31516c;background:#162b40;color:#c4d8ec}
+.resource-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}.resource-tabs button{background:#142238;border:1px solid var(--line);color:var(--muted);border-radius:9px;padding:8px 11px;font-size:12px}.resource-tabs button.active{border-color:var(--mint);color:var(--mint);background:#1b3a3a}
+.viewer{background:#0a1220;border:1px solid var(--line);border-radius:15px;overflow:hidden}.viewer-head{padding:12px 15px;display:flex;align-items:center;justify-content:space-between;gap:10px;background:#16263b;border-bottom:1px solid var(--line)}.viewer-head b{font-size:13px}.viewer iframe{width:100%;height:68vh;min-height:420px;border:0;background:white}.viewer-fallback{padding:10px 15px;color:var(--muted);font-size:11px}
+.research-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.finding{border:1px solid var(--line);border-radius:14px;padding:17px;background:#142238}.finding h3{font-size:15px;margin:0 0 7px}.finding p,.finding li{font-size:12px;color:#b5c7db}.finding ul{padding-left:18px;margin:8px 0}.finding .date{font-size:10px;color:var(--mint);font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.source-list{display:grid;gap:8px}.source{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px;background:#132239;border:1px solid var(--line);border-radius:11px;font-size:12px}.source a{color:var(--mint);text-decoration:none}.source a:hover{text-decoration:underline}
+footer{border-top:1px solid var(--line);margin-top:35px;padding-top:15px;color:#7086a1;font-size:11px}
+.mobile-nav{display:none}
+@media(max-width:900px){.shell{grid-template-columns:205px 1fr}.stats{grid-template-columns:repeat(2,1fr)}.subject-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.shell{display:block}aside{display:none}main{padding:20px 14px 90px}.top{align-items:flex-start}.datepill{font-size:10px}.subject-grid,.paper-grid,.research-grid{grid-template-columns:1fr}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:10;justify-content:space-around;background:#0d1929ed;backdrop-filter:blur(16px);border-top:1px solid var(--line);padding:7px 3px calc(7px + env(safe-area-inset-bottom))}.mobile-nav button{border:0;background:transparent;color:#8fa4bd;font-size:10px;display:grid;justify-items:center;gap:2px;padding:5px}.mobile-nav button.active{color:var(--mint)}.mobile-nav span{font-size:18px}.viewer iframe{height:60vh;min-height:350px}.stats{gap:9px}.stat{padding:12px}.stat .num{font-size:22px}.hero{border-radius:17px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside>
+ <div class="brand"><div class="logo">9+</div><div><b>9th Study Project</b><small>FBISE • GRADE IX</small></div></div>
+ <div class="nav-label">Study space</div>
+ <nav class="nav" id="sideNav">
+  <button class="active" data-page="home"><span class="ico">⌂</span>Overview</button>
+  <button data-page="questions"><span class="ico">✦</span>Important Questions</button>
+  <button data-page="papers"><span class="ico">▤</span>Past Papers</button>
+  <button data-page="models"><span class="ico">▣</span>Model Papers</button>
+  <button data-page="students"><span class="ico">✎</span>Student Papers</button>
+  <button data-page="research"><span class="ico">⌕</span>Research</button>
+ </nav>
+ <div class="side-note"><b style="color:var(--mint)">Study smart, not blindly.</b><br>Resources are labelled by scheme and year. Always check which pattern applies to your exam.</div>
+</aside>
+<main>
+ <header class="top"><div><div class="eyebrow">Your exam companion</div><h1 id="pageTitle">Let's make progress.</h1></div><div class="datepill">Grade IX · FBISE</div></header>
+
+<section class="page active" id="page-home">
+ <div class="hero">
+  <div class="eyebrow">A clearer way to prepare</div>
+  <h2>Your Grade 9 study desk.<br><span style="color:var(--mint)">Everything in one place.</span></h2>
+  <p>Practise important concepts, explore official model papers, learn from real student answer books and understand what FBISE expects.</p>
+  <div class="hero-actions"><button class="btn primary" onclick="showPage('questions')">Explore important questions →</button><button class="btn soft" onclick="showPage('research')">See research findings</button></div>
+ </div>
+ <div class="grid stats">
+  <div class="stat"><div class="num">5</div><small>Subjects with restructured 50/50 pattern</small></div>
+  <div class="stat"><div class="num">2027</div><small>Bilingual papers begin for specified subjects</small></div>
+  <div class="stat"><div class="num">120</div><small>SSC high-achiever answer books listed for 2026</small></div>
+  <div class="stat"><div class="num">3</div><small>Question thinking levels: K · U · A</small></div>
+ </div>
+ <div class="section-head"><div><h2>Choose a subject</h2><p>Start with the topic you want to improve.</p></div></div>
+ <div class="grid subject-grid" id="homeSubjects"></div>
+ <div class="notice info"><b>Pattern alert:</b> FBISE lists a 50% MCQ / 50% descriptive framework for Mathematics, Physics, Chemistry, Biology and Computer Science. The exact marks and section details are subject-specific—use the matching framework, not a guessed template.</div>
+</section>
+
+<section class="page" id="page-questions">
+ <div class="section-head"><div><h2>Important questions</h2><p>High-priority practice prompts with concise answer guidance.</p></div></div>
+ <div class="notice"><b>Honest label:</b> These are starter SLO-aligned practice questions. They are not yet a statistically verified "most repeated" list. Tap a question to reveal its answer guidance.</div>
+ <div class="toolbar"><input class="field search" id="qSearch" placeholder="Search a question or topic…"><select class="field" id="subjectFilter"><option value="all">All subjects</option></select><select class="field" id="typeFilter"><option value="all">All types</option><option>Concept</option><option>Short answer</option><option>Application</option><option>Long answer</option></select></div>
+ <div class="question-list" id="questionList"></div>
+</section>
+
+<section class="page" id="page-papers">
+ <div class="section-head"><div><h2>Previous examination papers</h2><p>Explore FBISE's SSC-I archive inside this page.</p></div></div>
+ <div class="notice"><b>Scheme warning:</b> Papers from 2023–2025 may follow earlier assessment structures. Use them for concepts and practice, but don't assume their pattern matches the 2026/2027 framework.</div>
+ <div class="viewer"><div class="viewer-head"><b>FBISE · SSC-I Old Question Papers</b><span class="tag green">Official archive</span></div><iframe title="FBISE previous papers archive" src="https://www.fbise.edu.pk/AllOldPapersSSC1.php" loading="lazy"></iframe><div class="viewer-fallback">If the board blocks embedded viewing in your browser, use the official archive through the source register in Research.</div></div>
+</section>
+
+<section class="page" id="page-models">
+ <div class="section-head"><div><h2>Model papers & assessment frameworks</h2><p>Official FBISE material, shown in an in-app document viewer.</p></div></div>
+ <div class="notice info"><b>Current-pattern library:</b> The official curriculum page now lists 50/50 frameworks for five core Grade IX subjects. Older 2025 PDFs are kept separate as archive examples, not substituted for the new pattern.</div>
+ <div class="resource-tabs" id="modelTabs">
+  <button class="active" data-doc="framework">Current frameworks</button>
+  <button data-doc="mathOld">Math · earlier model</button>
+  <button data-doc="biologyOld">Biology · earlier model</button>
+  <button data-doc="chemOld">Chemistry · earlier model</button>
+  <button data-doc="physicsOld">Physics · earlier model</button>
+  <button data-doc="englishOld">English · model</button>
+ </div>
+ <div class="viewer"><div class="viewer-head"><b id="modelTitle">FBISE · Assessment Frameworks & Model Papers</b><span class="tag green">Official source</span></div><iframe id="modelFrame" title="FBISE model paper document" src="https://www.fbise.edu.pk/curriculum_model_paper.php"></iframe><div class="viewer-fallback" id="modelNote">The current official library lists the latest frameworks, SLO alignment charts and tables of specifications.</div></div>
+</section>
+
+<section class="page" id="page-students">
+ <div class="section-head"><div><h2>Real student answer papers</h2><p>Study how students present answers in actual FBISE answer books.</p></div></div>
+ <div class="grid stats" style="grid-template-columns:repeat(3,1fr)">
+  <div class="stat"><div class="num">120</div><small>SSC papers listed</small></div><div class="stat"><div class="num">12</div><small>SSC subject rows</small></div><div class="stat"><div class="num">10</div><small>Scripts per listed subject</small></div>
+ </div>
+ <div class="notice"><b>Important:</b> FBISE calls these "High Achiever Papers". The listing does not publish each student's name, school or marks. Treat them as real marked answer-book examples—not official model answers or proof of full marks.</div>
+ <div class="viewer"><div class="viewer-head"><b>FBISE · High Achiever Papers · SSC 1st Annual 2026</b><span class="tag green">Official answer books</span></div><iframe title="FBISE high achiever student answer books" src="https://www.fbise.edu.pk/topper_copies.php" loading="lazy"></iframe><div class="viewer-fallback">Choose SSC, then a subject and one of the available student papers within the embedded FBISE page. If it does not display, use the official source listed in Research.</div></div>
+ <div class="section-head"><div><h2>What to learn from an answer book</h2><p>Compare methods, not handwriting styles.</p></div></div>
+ <div class="grid research-grid">
+  <div class="finding"><h3>Structure</h3><p>Notice how the student uses headings, numbering, spacing and a clear order.</p></div>
+  <div class="finding"><h3>Marks and detail</h3><p>Compare the length of an answer with the marks assigned. Avoid writing unrelated material.</p></div>
+  <div class="finding"><h3>Working and diagrams</h3><p>Look for formulas, units, labelled diagrams, equations and visible calculation steps.</p></div>
+  <div class="finding"><h3>Presentation</h3><p>Look for readable answers and clear final results. Do not assume decoration earns marks.</p></div>
+ </div>
+</section>
+
+<section class="page" id="page-research">
+ <div class="section-head"><div><h2>Research desk</h2><p>What was checked, what was found, and what still needs verification.</p></div><span class="tag green">Reviewed 17 Nov 2026</span></div>
+ <div class="notice info"><b>Research rule:</b> Official FBISE documents take priority. Third-party summaries are used only as cross-checks. Where a claim is not confirmed by a board document, it is marked as unverified.</div>
+ <div class="grid research-grid">
+  <article class="finding"><div class="date">07 Aug 2026 · Exam structure</div><h3>Restructured 50/50 pattern</h3><p>FBISE's curriculum/model-paper portal identifies new 50% MCQ / 50% descriptive frameworks for five core subjects:</p><ul><li>Mathematics</li><li>Physics</li><li>Chemistry</li><li>Biology</li><li>Computer Science</li></ul><p>Exact paper marks, question counts and time limits must be read from each subject's framework. Do not copy a single subject's distribution to all five.</p></article>
+  <article class="finding"><div class="date">16 Nov 2026 · Latest notification</div><h3>Bilingual papers from 2027</h3><p>FBISE notification No. 1-1/FBISE/RES/2026/370 says SSC papers in Mathematics, Physics, Chemistry and Biology/Computer Science will be composed/administered in both Urdu and English from First Annual Examination 2027 onward.</p></article>
+  <article class="finding"><div class="date">27 Mar 2025 · Scheme implementation</div><h3>Inclusive Scheme of Studies 2024</h3><p>FBISE implemented it at SSC-I from academic session 2025 and SSC-II from academic session 2026. Students continuing under Scheme 2006 for permitted reappearance/improvement chances remain on that scheme.</p></article>
+  <article class="finding"><div class="date">Curriculum design · SLOs</div><h3>Study outcomes, not only textbook pages</h3><p>FBISE assessment frameworks map learning outcomes to cognitive levels:</p><ul><li><b>K — Knowledge:</b> recall and identify</li><li><b>U — Understanding:</b> explain and interpret</li><li><b>A — Application:</b> use ideas in a new situation</li></ul><p>The framework separates summative SLOs (annual examination) from formative SLOs (classroom learning).</p></article>
+  <article class="finding"><div class="date">Official archive · Past papers</div><h3>SSC-I paper archive</h3><p>The official page lists 2026 First Annual, 2025 Second Annual, 2025, 2024 and 2023 papers. These are useful for familiarisation and topic practice, but older papers may belong to a different pattern or scheme.</p></article>
+  <article class="finding"><div class="date">SSC 1st Annual 2026 · Answer books</div><h3>High Achiever Papers</h3><p>FBISE lists 10 student answer-book PDFs for each of 12 SSC subjects (120 listed scripts). Subjects shown include Biology, Chemistry, Computer Science, English, General Science, Islamic Studies, Mathematics, Pakistan Studies, Physics and Urdu, plus Civics and Education.</p><p>The page does not publish student marks or names. Each script needs separate inspection before making claims about quality.</p></article>
+  <article class="finding"><div class="date">Scheme 2024 · Subject allocation</div><h3>Do not assume old Grade IX subject lists</h3><p>The revised scheme places Pakistan Studies at SSC-II and allocates Islamiat/Religious Education and Tarjuma-tul-Quran/Ethics differently from the old scheme. The app should let students identify their actual group and scheme before adding a personalised timetable.</p></article>
+  <article class="finding"><div class="date">Research limitation</div><h3>Repeated-question statistics are not complete yet</h3><p>The archive has been located, but every paper from 2022–2026 has not yet been transcribed and compared. No question in this app is falsely labelled "most repeated". A valid frequency study must group exact repeats and same-SLO variations separately, while excluding incompatible schemes.</p></article>
+ </div>
+ <div class="section-head"><div><h2>Official source register</h2><p>Primary documents used for the findings above.</p></div></div>
+ <div class="source-list">
+  <div class="source"><span>FBISE · Curriculum, assessment frameworks & model papers</span><a href="https://www.fbise.edu.pk/curriculum_model_paper.php" target="_blank" rel="noopener">Source ↗</a></div>
+  <div class="source"><span>FBISE · Grade IX syllabus & model papers</span><a href="https://www.fbise.edu.pk/syllabusSSC-I.php" target="_blank" rel="noopener">Source ↗</a></div>
+  <div class="source"><span>FBISE · Combined syllabus/model/past paper portal</span><a href="https://www.fbise.edu.pk/allpaper.php" target="_blank" rel="noopener">Source ↗</a></div>
+  <div class="source"><span>FBISE · SSC-I previous question papers</span><a href="https://www.fbise.edu.pk/AllOldPapersSSC1.php" target="_blank" rel="noopener">Source ↗</a></div>
+  <div class="source"><span>FBISE · High Achiever Papers (SSC 2026)</span><a href="https://www.fbise.edu.pk/topper_copies.php" target="_blank" rel="noopener">Source ↗</a></div>
+  <div class="source"><span>FBISE · Inclusive Scheme implementation notification (2025)</span><a href="https://www.fbise.edu.pk/Syllabus/Scheme-of-Studies.pdf" target="_blank" rel="noopener">Source ↗</a></div>
+  <div class="source"><span>NCC · Revised Inclusive Scheme of Studies 2024</span><a href="https://www.fbise.edu.pk/Syllabus/Scheme%20of%20Studies%20updated%20revised%20version-I_new.pdf" target="_blank" rel="noopener">Source ↗</a></div>
+  <div class="source"><span>FBISE · Bilingual-paper notification (16 Nov 2026)</span><a href="https://www.fbise.edu.pk/notifications/revised%20scheme%20of%20studies%202024%20new.pdf" target="_blank" rel="noopener">Source ↗</a></div>
+ </div>
+ <div class="section-head"><div><h2>Important research cautions</h2><p>These keep the app honest and safe for exam preparation.</p></div></div>
+ <div class="finding"><ul><li>Do not mix Scheme 2006 and Inclusive Scheme 2024 resources.</li><li>Do not assume all subjects use the 50/50 pattern; it is currently listed for five core subjects.</li><li>Do not assume the 2025 model PDFs are the new 2026/2027 model papers.</li><li>Do not call a topic "repeated" until it has been counted across actual papers.</li><li>Do not call a high-achiever script an official marking scheme.</li><li>Update this research log whenever FBISE publishes a new framework or notification.</li></ul></div>
+</section>
+
+<footer>9th Study Project · Independent student study companion · Not affiliated with FBISE. Always verify current examination instructions with the Board.</footer>
+</main>
+</div>
+<nav class="mobile-nav" id="mobileNav">
+ <button class="active" data-page="home"><span>⌂</span>Home</button><button data-page="questions"><span>✦</span>Questions</button><button data-page="papers"><span>▤</span>Past</button><button data-page="models"><span>▣</span>Models</button><button data-page="students"><span>✎</span>Scripts</button><button data-page="research"><span>⌕</span>Research</button>
+</nav>
+<script>
+const subjects=[
+ {id:"Math",name:"Mathematics",icon:"∑",desc:"Numbers · Algebra · Geometry"},
+ {id:"Physics",name:"Physics",icon:"⚛",desc:"Concepts · Laws · Applications"},
+ {id:"Chemistry",name:"Chemistry",icon:"⚗",desc:"Atoms · Bonding · Reactions"},
+ {id:"Biology",name:"Biology",icon:"⌬",desc:"Cells · Life processes · Systems"},
+ {id:"Computer Science",name:"Computer Science",icon:"⌘",desc:"Computing · Logic · Digital life"},
+ {id:"English",name:"English",icon:"A",desc:"Reading · Grammar · Writing"},
+ {id:"Urdu",name:"Urdu",icon:"ا",desc:"فہم · قواعد · تحریر"},
+ {id:"Islamiat",name:"Islamiat",icon:"☾",desc:"Concepts · Values · Application"},
+ {id:"Tarjuma Quran",name:"Tarjuma-tul-Quran",icon:"۞",desc:"Translation · Understanding"}
+];
+const questions=[
+ {s:"Chemistry",topic:"Periodic trends",type:"Concept",level:"Understanding",q:"How do atomic radius and electronegativity generally change across a period and down a group?",a:"Across a period, effective nuclear attraction generally increases and atomic radius decreases; electronegativity generally increases. Down a group, additional electron shells increase atomic radius and electronegativity generally decreases. Explain the trend rather than memorising isolated values.",tags:["Cognitive level U","Periodic table"]},
+ {s:"Chemistry",topic:"Chemical bonding",type:"Short answer",level:"Understanding",q:"Differentiate between ionic and covalent compounds.",a:"Ionic bonding involves transfer of electrons and electrostatic attraction between oppositely charged ions. Covalent bonding involves sharing of electron pairs between atoms. Add a suitable example for each if the question asks for examples.",tags:["Cognitive level U","Bonding"]},
+ {s:"Chemistry",topic:"Mole calculations",type:"Application",level:"Application",q:"How can you calculate the number of moles when mass and molar mass are given?",a:"Use n = m / M, where n is amount in moles, m is mass in grams and M is molar mass in g mol⁻¹. Substitute values with units, calculate and write the final unit. Check that the units cancel correctly.",tags:["Cognitive level A","Numericals"]},
+ {s:"Chemistry",topic:"Isotopes",type:"Application",level:"Application",q:"How is relative atomic mass calculated from isotopic masses and abundances?",a:"Multiply each isotope's mass by its fractional abundance, add the products, and divide by the total abundance if percentages have not already been converted to fractions. Show the weighted-average working.",tags:["Cognitive level A","Numericals"]},
+ {s:"Chemistry",topic:"Acid rain",type:"Long answer",level:"Understanding",q:"Explain how sulfur compounds contribute to acid rain and describe ways to reduce its effects.",a:"Sulfur dioxide released during combustion can react in the atmosphere to form acidic substances. These return with precipitation and can affect water, soil, plants and buildings. Controls include low-sulfur fuels, emission treatment, cleaner energy and reduced fossil-fuel use.",tags:["Cognitive level U","Environment"]},
+ {s:"Physics",topic:"Measurement",type:"Concept",level:"Understanding",q:"Why are standard units and suitable measuring instruments important in physics?",a:"Standard units make measurements consistent and comparable. The instrument should have a suitable range and resolution for the quantity being measured. Record the value with its correct unit and consider measurement uncertainty.",tags:["Cognitive level U","Measurement"]},
+ {s:"Physics",topic:"Motion",type:"Application",level:"Application",q:"How do you calculate average speed from a journey?",a:"Average speed = total distance travelled ÷ total time taken. Convert units consistently before substituting. Average speed is a scalar quantity and is not necessarily equal to the speed at every moment.",tags:["Cognitive level A","Numericals"]},
+ {s:"Physics",topic:"Forces",type:"Short answer",level:"Understanding",q:"Differentiate between mass and weight.",a:"Mass is the amount of matter/inertia of a body and is measured in kilograms. Weight is the gravitational force on the body, W = mg, and is measured in newtons. Mass is essentially constant for a body; weight changes with gravitational field strength.",tags:["Cognitive level U","Definitions"]},
+ {s:"Physics",topic:"Energy",type:"Application",level:"Application",q:"How is work done calculated when a constant force acts in the direction of displacement?",a:"Work done = force × displacement in the direction of the force, W = Fs. Use newtons and metres so the result is in joules. If the force is not in the direction of motion, use the component along the displacement.",tags:["Cognitive level A","Numericals"]},
+ {s:"Biology",topic:"Cell structure",type:"Short answer",level:"Understanding",q:"Compare the main features of plant and animal cells.",a:"Both have a cell membrane, cytoplasm, nucleus and other shared organelles. Typical plant cells also have a cellulose cell wall, chloroplasts in photosynthetic tissues and a large permanent vacuole. Avoid saying every plant cell contains chloroplasts.",tags:["Cognitive level U","Cells"]},
+ {s:"Biology",topic:"Biomolecules",type:"Concept",level:"Knowledge",q:"Name the major groups of biological macromolecules and state one role of each.",a:"Carbohydrates provide energy and structural support; lipids store energy and form membranes; proteins act as enzymes and structural/functional molecules; nucleic acids store and transmit genetic information.",tags:["Cognitive level K","Biomolecules"]},
+ {s:"Biology",topic:"Enzymes",type:"Long answer",level:"Understanding",q:"Explain how temperature can affect enzyme activity.",a:"As temperature rises, particles move faster and successful collisions generally increase up to an optimum temperature. Above the optimum, the enzyme's structure/active site may change (denaturation), reducing activity. Draw a labelled activity-versus-temperature curve if requested.",tags:["Cognitive level U","Application"]},
+ {s:"Biology",topic:"Cell division",type:"Concept",level:"Understanding",q:"Why is cell division important in living organisms?",a:"Cell division supports growth, replacement and repair of cells, and reproduction in some organisms. Mitosis generally produces genetically similar daughter cells; meiosis reduces chromosome number to form gametes in organisms that reproduce sexually.",tags:["Cognitive level U","Cell cycle"]},
+ {s:"Computer Science",topic:"Digital safety",type:"Concept",level:"Understanding",q:"Differentiate between phishing and pharming.",a:"Phishing uses deceptive messages or websites to trick people into revealing information. Pharming redirects users to a fraudulent site, often without the user noticing the redirection. Check website addresses and never share passwords or verification codes.",tags:["Cognitive level U","Digital safety"]},
+ {s:"Computer Science",topic:"Information literacy",type:"Application",level:"Application",q:"How can you decide whether an online news source is credible?",a:"Check the author and publisher, date, evidence and references. Compare the claim with independent reliable sources. Watch for sensational wording, manipulated images and missing context.",tags:["Cognitive level A","Credible sources"]},
+ {s:"Computer Science",topic:"Computing and society",type:"Long answer",level:"Understanding",q:"Describe two positive and two negative effects of computing on society.",a:"Possible benefits include communication, access to education, productivity and digital services. Possible harms include privacy loss, scams, misinformation, unequal access and environmental impacts. Explain each effect with a relevant example.",tags:["Cognitive level U","Digital society"]},
+ {s:"Mathematics",topic:"Algebra",type:"Application",level:"Application",q:"What steps should you show when solving a linear equation?",a:"Simplify both sides, collect variable terms on one side, collect constants on the other, divide by the coefficient, and check the result by substitution. Keep equivalent operations balanced on both sides.",tags:["Cognitive level A","Working"]},
+ {s:"Mathematics",topic:"Geometry",type:"Concept",level:"Understanding",q:"How should you justify a geometrical result instead of only writing the answer?",a:"State the relevant property, theorem or definition, show the logical steps, and connect each step to the given information. A diagram can support the reasoning but does not replace a proof when one is required.",tags:["Cognitive level U","Reasoning"]},
+ {s:"Mathematics",topic:"Information handling",type:"Application",level:"Application",q:"How do you find the mean of a set of observations?",a:"Add all observations and divide by the number of observations: mean = sum of values ÷ number of values. For a frequency table, multiply each value by its frequency, add the products and divide by total frequency.",tags:["Cognitive level A","Statistics"]},
+ {s:"English",topic:"Comprehension",type:"Short answer",level:"Understanding",q:"How should you answer a question based on an unseen passage?",a:"Read the question carefully, locate the relevant part of the passage, answer in your own clear words where appropriate, and avoid adding unsupported information. Match the detail to the marks.",tags:["Reading","Exam technique"]},
+ {s:"English",topic:"Writing",type:"Long answer",level:"Application",q:"What makes a formal letter effective in an examination?",a:"Use the correct format, a clear purpose, polite formal language, logically ordered paragraphs and accurate grammar. Address every part of the prompt and stay within the required length.",tags:["Writing","Structure"]},
+ {s:"Urdu",topic:"تحریر",type:"Long answer",level:"Application",q:"امتحان میں مضمون یا خط لکھتے وقت کن باتوں کا خیال رکھنا چاہیے؟",a:"موضوع سے متعلق رہیں، مناسب عنوان اور ترتیب اختیار کریں، زبان سادہ اور درست رکھیں، پیراگراف واضح بنائیں اور املا و رموزِ اوقاف کا خیال رکھیں۔ سوال میں دی گئی تمام ہدایات پوری کریں۔",tags:["تحریر","زبان"]},
+ {s:"Islamiat",topic:"Understanding",type:"Short answer",level:"Understanding",q:"How can a student connect a moral teaching from the syllabus with everyday life?",a:"Explain the teaching accurately, then give a realistic example from daily life such as honesty, responsibility, fairness or kindness. Keep the example directly connected to the teaching and the wording of the question.",tags:["Understanding","Application"]},
+ {s:"Tarjuma Quran",topic:"Translation and meaning",type:"Concept",level:"Understanding",q:"When explaining a Qur'anic passage, why is it important to distinguish translation from explanation?",a:"Translation conveys the meaning of the words in another language. Explanation gives context and clarifies the lesson. Keep the translation faithful and make sure the explanation does not add unsupported meanings.",tags:["Understanding","Accuracy"]}
+];
+const titles={home:"Let's make progress.",questions:"Important questions",papers:"Previous examination papers",models:"Model papers & frameworks",students:"Real student answer papers",research:"Research desk"};
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id==="page-"+id));document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===id));document.getElementById("pageTitle").textContent=titles[id]||"9th Study Project";window.scrollTo({top:0,behavior:"smooth"});}
+document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+const subjectHTML=subjects.map(s=>'<button class="card subject" onclick="filterSubject(\''+s.id+'\')"><span class="sub-icon">'+s.icon+'</span><span><b>'+s.name+'</b><small>'+s.desc+'</small></span></button>').join("");
+document.getElementById("homeSubjects").innerHTML=subjectHTML;
+document.getElementById("subjectFilter").innerHTML+='<option>Mathematics</option><option>Physics</option><option>Chemistry</option><option>Biology</option><option>Computer Science</option><option>English</option><option>Urdu</option><option>Islamiat</option><option>Tarjuma Quran</option>';
+function filterSubject(s){showPage("questions");document.getElementById("subjectFilter").value=s;renderQuestions();}
+function renderQuestions(){const term=document.getElementById("qSearch").value.toLowerCase();const sub=document.getElementById("subjectFilter").value;const typ=document.getElementById("typeFilter").value;const filtered=questions.filter(x=>(sub==="all"||x.s===sub)&&(typ==="all"||x.type===typ)&&[x.q,x.topic,x.s,x.a].join(" ").toLowerCase().includes(term));document.getElementById("questionList").innerHTML=filtered.map((x,i)=>'<article class="q-card" onclick="this.classList.toggle(\'open\')"><div class="q-top"><div><h3>'+x.q+'</h3><span class="tag">'+x.s+'</span><span class="tag">'+x.topic+'</span><span class="tag green">'+x.type+'</span></div><span class="muted">＋</span></div><div class="answer"><b>Answer guidance</b><p>'+x.a+'</p><div>'+x.tags.map(t=>'<span class="tag">'+t+'</span>').join("")+'</div></div></article>').join("")||'<div class="card muted">No matching questions. Try a different search or subject.</div>';}
+["qSearch","subjectFilter","typeFilter"].forEach(id=>document.getElementById(id).addEventListener("input",renderQuestions));renderQuestions();
+const modelDocs={
+ framework:{title:"FBISE · Current Assessment Frameworks & Model Papers",url:"https://www.fbise.edu.pk/curriculum_model_paper.php",note:"Current official library. Select the Grade IX 50% MCQ / 50% descriptive framework for the relevant core subject."},
+ mathOld:{title:"Mathematics · Earlier Grade IX model paper (archive)",url:"https://mail.fbise.edu.pk/ModelPaper/2024New/maths/Final_Assessment_Framework_Model_Question_Paper_Mathematics_SSC-I.pdf",note:"Earlier model-paper example. Not a replacement for the current 50/50 framework."},
+ biologyOld:{title:"Biology · Grade IX model paper (2025 archive)",url:"https://www.fbise.edu.pk/ModelPaper/2025/Assessment%20Frameworks/SSC-I/Final%20Assessment%20Framework%20Model%20Question%20Paper%20Biology%20SSC-I.pdf",note:"2025 assessment framework. Keep its scheme and pattern label in mind."},
+ chemOld:{title:"Chemistry · Grade IX model paper (2025 archive)",url:"https://www.fbise.edu.pk/ModelPaper/2025/Assessment%20Frameworks/SSC-I/Final%20Assessment%20Framework%20Model%20Question%20Paper%20Chemistry%20SSC-I.pdf",note:"2025 assessment framework. Current 50/50 materials are listed separately on FBISE's curriculum page."},
+ physicsOld:{title:"Physics · Grade IX model paper (2025 archive)",url:"https://www.fbise.edu.pk/ModelPaper/2025/Assessment%20Frameworks/SSC-I/Final%20Assessment%20Framework%20Model%20Question%20Paper%20Physics%20SSC-I.pdf",note:"2025 assessment framework. Use as a content reference, not as the latest paper structure."},
+ englishOld:{title:"English · Grade IX/X model paper (2025 archive)",url:"https://www.fbise.edu.pk/ModelPaper/2025/Assessment%20Frameworks/SSC-I/Final%20Assessment%20Framework%20%2B%20Model%20Question%20Paper%20English%20SSC-I.pdf",note:"English model-paper archive. English is not one of the five subjects listed for the 50/50 restructuring."}
+};
+document.getElementById("modelTabs").addEventListener("click",e=>{const b=e.target.closest("button[data-doc]");if(!b)return;document.querySelectorAll("#modelTabs button").forEach(x=>x.classList.toggle("active",x===b));const d=modelDocs[b.dataset.doc];document.getElementById("modelTitle").textContent=d.title;document.getElementById("modelFrame").src=d.url;document.getElementById("modelNote").textContent=d.note;});
+</script>
+</body></html>
